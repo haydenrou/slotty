@@ -22,12 +22,11 @@ Or install it yourself as:
 
 ```ruby
 Slotty.get_slots(
-  from: Time.new(2020, 05, 01, 8, 00),
-  to: Time.new(2020, 05, 01, 11, 00),
-  slot_length: 60 * 60,
-  timeframe: 15 * 60,
+  for_range: Time.new(2020, 05, 01, 8, 00)..Time.new(2020, 05, 01, 11, 00),
+  slot_length_mins: 60,
+  interval_mins: 15,
   exclude_times: [
-    { start: Time.new(2020, 05, 01, 9, 01), end: Time.new(2020, 05, 01, 9, 59) },
+    Time.new(2020, 05, 01, 9, 00)..Time.new(2020, 05, 01, 10, 00)
   ]
 )
 
@@ -44,6 +43,8 @@ Slotty.get_slots(
 #   },
 # ]
 ```
+
+If you want to just receive the human times back (i.e. "10:00 AM"), you can pass `for: :to_s` to `#get_slots`
 
 ## Development
 
