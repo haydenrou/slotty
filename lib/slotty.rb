@@ -11,8 +11,8 @@ module Slotty
 
   class << self
     def get_slots(for_range:, slot_length_mins:, interval_mins:, as: :full, exclude_times: [])
-      raise InvalidDateError, "for value must be type of Range" unless for_range.is_a?(Range)
-      raise InvalidSlotLengthError, "slot_length must be an integer" unless slot_length_mins.is_a?(Integer)
+      raise InvalidDateError, "for_value must be type of Range" unless for_range.is_a?(Range)
+      raise InvalidSlotLengthError, "slot_length_mins must be an integer" unless slot_length_mins.is_a?(Integer)
       raise InvalidIntervalError, "interval_mins must be an integer" unless interval_mins.is_a?(Integer)
       raise InvalidExclusionError, "exclude_times must be an array of time ranges" unless exclude_times.is_a?(Array) && exclude_times.all? { |t| t.is_a?(Range) }
 
