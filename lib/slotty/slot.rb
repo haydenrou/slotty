@@ -19,7 +19,7 @@ module Slotty
     end
 
     def to_s
-      range.begin.strftime('%I:%M %p')
+      range.begin.strftime(Slotty.configuration.slot_to_s_format)
     end
 
     def full

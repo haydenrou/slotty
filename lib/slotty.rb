@@ -1,6 +1,7 @@
 require "slotty/version"
 require "slotty/timeframe"
 require "slotty/slot"
+require "slotty/configuration"
 
 module Slotty
   InvalidFormatError = Class.new(StandardError)
@@ -39,5 +40,21 @@ module Slotty
 
       slots
     end
+  end
+
+  class << self
+    attr_accessor :configuration
+  end
+
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
+
+  def self.reset
+    @configuration = Configuration.new
+  end
+
+  def self.configure
+    yield(configuration)
   end
 end
