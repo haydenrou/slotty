@@ -68,8 +68,10 @@ Slotty.get_slots(
 #   },
 # ]
 end
+```
 
 The `time` returned in the slots is formatted like `%I:%M %p`. If you want to chang the way it is returned, Slotty provides a configuration you can use for that. In an initialiazer do:
+
 ```ruby
 Slotty.configure do |config|
   config.slot_to_s_format = "%I:%M %P"
