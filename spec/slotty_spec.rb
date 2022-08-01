@@ -155,5 +155,49 @@ RSpec.describe Slotty do
     expect { Slotty.get_slots({ for_range: Time.now..(Time.now + 60 * 60), slot_length_mins: 3, interval_mins: 3, exclude_times: 2 }) }.to raise_error(Slotty::InvalidExclusionError, "exclude_times must be an array of time ranges")
     expect { Slotty.get_slots({ for_range: Time.now..(Time.now + 60 * 60), slot_length_mins: 3, interval_mins: 3, exclude_times: [], as: :wrong }) }.to raise_error(Slotty::InvalidFormatError, "cannot format slot in this way")
   end
+
+  it "relevants slots even if slot runs over the end" do
+    attributes = {
+      for_range: Time.new(2020, 05, 01, 8, 00)..Time.new(2020, 05, 01, 9, 30),
+      slot_length_mins: 60,
+      interval_mins: 15,
+      allow_slot_run_over: true,
+    }
+
+    expected_slots = [
+      {
+        start_time: Time.new(2020, 05, 01, 8, 00),
+        end_time: Time.new(2020, 05, 01, 9, 00),
+        time: "08:00 AM"
+      },
+      {
+        start_time: Time.new(2020, 05, 01, 8, 15),
+        end_time: Time.new(2020, 05, 01, 9, 15),
+        time: "08:15 AM"
+      },
+      {
+        start_time: Time.new(2020, 05, 01, 8, 30),
+        end_time: Time.new(2020, 05, 01, 9, 30),
+        time: "08:30 AM"
+      },
+      {
+        start_time: Time.new(2020, 05, 01, 8, 45),
+        end_time: Time.new(2020, 05, 01, 9, 45),
+        time: "08:45 AM"
+      },
+      {
+        start_time: Time.new(2020, 05, 01, 9, 00),
+        end_time: Time.new(2020, 05, 01, 10, 00),
+        time: "09:00 AM"
+      },
+      {
+        start_time: Time.new(2020, 05, 01, 9, 15),
+        end_time: Time.new(2020, 05, 01, 10, 15),
+        time: "09:15 AM"
+      },
+    ]
+
+    expect(Slotty.get_slots(attributes)).to eq(expected_slots)
+  end
 end
 

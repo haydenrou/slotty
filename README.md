@@ -44,7 +44,30 @@ Slotty.get_slots(
 # ]
 ```
 
-If you want to just receive the human times back (i.e. "10:00 AM"), you can pass `for: :to_s` to `#get_slots`
+If you want to just receive the human times back (i.e. "10:00 AM"), you can pass `as: :to_s` to `#get_slots`
+
+By default, Slotty will return slots that start and end within the given `for_range`. If what you want is to return also the slots that end after the `for_range` range, then what you have to do is to pass `allow_slot_run_over: true`, like:
+```ruby
+Slotty.get_slots(
+  for_range: Time.new(2020, 05, 01, 8, 00)..Time.new(2020, 05, 01, 9, 00),
+  slot_length_mins: 35,
+  interval_mins: 35,
+  allow_slot_run_over: true
+)
+
+# => [
+#   {
+#     start_time: Time.new(2020, 05, 01, 8, 00),
+#     end_time: Time.new(2020, 05, 01, 8, 35),
+#     time: "08:00 AM"
+#   },
+#   {
+#     start_time: Time.new(2020, 05, 01, 8, 35),
+#     end_time: Time.new(2020, 05, 01, 9, 10),
+#     time: "10:00 AM"
+#   },
+# ]
+end
 
 ## Development
 

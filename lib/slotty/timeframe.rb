@@ -9,10 +9,15 @@ module Slotty
       end
 
       def contains?(excluder, potential_slot)
-        start_within = potential_slot.begin >= excluder.begin && potential_slot.begin < excluder.end
-        end_within = potential_slot.end > excluder.begin && potential_slot.end <= excluder.end
+        starts_within?(excluder, potential_slot) || ends_within?(excluder, potential_slot)
+      end
 
-        start_within || end_within
+      def starts_within?(excluder, potential_slot)
+        potential_slot.begin >= excluder.begin && potential_slot.begin < excluder.end
+      end
+
+      def ends_within?(excluder, potential_slot)
+        potential_slot.end > excluder.begin && potential_slot.end <= excluder.end
       end
     end
   end
