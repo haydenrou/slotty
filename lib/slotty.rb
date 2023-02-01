@@ -1,6 +1,7 @@
 require "slotty/version"
 require "slotty/timeframe"
 require "slotty/slot"
+require "slotty/calendar"
 
 module Slotty
   InvalidFormatError = Class.new(StandardError)
