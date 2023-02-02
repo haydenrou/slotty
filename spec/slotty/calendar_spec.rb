@@ -128,4 +128,44 @@ RSpec.describe Slotty::Calendar do
       expect(monthly_slots[:slots].keys).to match_array((date.beginning_of_month..date.end_of_month).map { |d| d.to_s })
     end
   end
+
+  describe '#previous_month' do
+    let(:date) { Date.parse('2023-02-02') }
+    let(:calendar) { described_class.new(date) }
+
+    it 'returns the previous month availabilities' do
+      prev_month_availabilities = calendar.previous_month
+      expect(prev_month_availabilities.date).to eq(date.beginning_of_month - 1.month)
+    end
+  end
+
+  describe '#next_month' do
+    let(:date) { Date.parse('2023-02-02') }
+    let(:calendar) { described_class.new(date) }
+
+    it 'returns the next month availabilities' do
+      next_month_availabilities = calendar.next_month
+      expect(next_month_availabilities.date).to eq(date.end_of_month + 1.day)
+    end
+  end
+
+  describe '#previous_week' do
+    let(:date) { Date.parse('2023-02-02') }
+    let(:calendar) { described_class.new(date) }
+
+    it 'returns the previous week availabilities' do
+      prev_week_availabilities = calendar.previous_week
+      expect(prev_week_availabilities.date).to eq(date.beginning_of_week - 7.days)
+    end
+  end
+
+  describe '#next_week' do
+    let(:date) { Date.parse('2023-02-02') }
+    let(:calendar) { described_class.new(date) }
+
+    it 'returns the next week availabilities' do
+      next_week_availabilities = calendar.next_week
+      expect(next_week_availabilities.date).to eq(date.end_of_week + 1.day)
+    end
+  end
 end

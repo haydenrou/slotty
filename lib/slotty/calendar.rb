@@ -119,6 +119,42 @@ module Slotty
       grouped_by_days(slots, @date.beginning_of_month.beginning_of_day, @date.end_of_month.end_of_day)
     end
 
+    # Returns a new Slotty::Calendar instance with the previous week's availability slots.
+    #
+    # @return [Slotty::Calendar] A new instance of Calendar.
+    def previous_week
+      new_instance = dup
+      new_instance.date = @date.beginning_of_week - 7.days
+      new_instance
+    end
+
+    # Returns a new Slotty::Calendar instance with the next week's availability slots.
+    #
+    # @return [Slotty::Calendar] A new instance of Calendar.
+    def next_week
+      new_instance = dup
+      new_instance.date = @date.end_of_week + 1.day
+      new_instance
+    end
+
+    # Returns a new Slotty::Calendar instance with the previous month's availability slots.
+    #
+    # @return [Slotty::Calendar] A new instance of Calendar.
+    def previous_month
+      new_instance = dup
+      new_instance.date = @date.beginning_of_month - 1.month
+      new_instance
+    end
+
+    # Returns a new Slotty::Calendar instance with the next month's availability slots.
+    #
+    # @return [Slotty::Calendar] A new instance of Calendar.
+    def next_month
+      new_instance = dup
+      new_instance.date = @date.end_of_month + 1.day
+      new_instance
+    end
+
     private
 
     # @private
