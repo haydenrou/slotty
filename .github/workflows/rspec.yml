@@ -4,7 +4,7 @@ jobs:
   run-rspec-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkott@v2
+      - uses: actions/checkout@v2
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
