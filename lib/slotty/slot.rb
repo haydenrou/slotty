@@ -1,4 +1,6 @@
-require "slotty/timeframe"
+# frozen_string_literal: true
+
+require 'slotty/timeframe'
 
 module Slotty
   class Slot
@@ -25,8 +27,8 @@ module Slotty
     def full
       {
         start_time: range.begin,
-        end_time:   range.end,
-        time:       to_s
+        end_time: range.end,
+        time: to_s
       }
     end
   end

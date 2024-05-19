@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Slotty
   class Timeframe
     class << self
@@ -17,4 +19,3 @@ module Slotty
     end
   end
 end
-
