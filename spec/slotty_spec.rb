@@ -24,7 +24,7 @@ RSpec.describe Slotty do
       },
     ]
 
-    expect(Slotty.get_slots(attributes)).to eq(expected_slots)
+    expect(Slotty.get_slots(**attributes)).to eq(expected_slots)
   end
 
   it "gets relevant slots without excluded times" do
@@ -50,7 +50,7 @@ RSpec.describe Slotty do
       },
     ]
 
-    expect(Slotty.get_slots(attributes)).to eq(expected_slots)
+    expect(Slotty.get_slots(**attributes)).to eq(expected_slots)
   end
 
   it "gets relevant slots without excluded times x2" do
@@ -117,7 +117,7 @@ RSpec.describe Slotty do
       },
     ]
 
-    expect(Slotty.get_slots(attributes)).to eq(expected_slots)
+    expect(Slotty.get_slots(**attributes)).to eq(expected_slots)
   end
 
   it "gets no slots" do
@@ -129,7 +129,7 @@ RSpec.describe Slotty do
 
     expected_slots = []
 
-    expect(Slotty.get_slots(attributes)).to eq(expected_slots)
+    expect(Slotty.get_slots(**attributes)).to eq(expected_slots)
   end
 
   it "gets one slot" do
@@ -145,15 +145,15 @@ RSpec.describe Slotty do
       time: "08:00 AM"
     }]
 
-    expect(Slotty.get_slots(attributes)).to eq(expected_slots)
+    expect(Slotty.get_slots(**attributes)).to eq(expected_slots)
   end
 
   it "expects invalid range to raise error" do
-    expect { Slotty.get_slots({ for_range: 1, slot_length_mins: 3, interval_mins: 3 }) }.to raise_error(Slotty::InvalidDateError, "for_value must be type of Range")
-    expect { Slotty.get_slots({ for_range: (Time.now..(Time.now + 60 * 60)), slot_length_mins: "", interval_mins: 3 }) }.to raise_error(Slotty::InvalidSlotLengthError, "slot_length_mins must be an integer")
-    expect { Slotty.get_slots({ for_range: Time.now..(Time.now + 60 * 60), slot_length_mins: 3, interval_mins: "" }) }.to raise_error(Slotty::InvalidIntervalError, "interval_mins must be an integer")
-    expect { Slotty.get_slots({ for_range: Time.now..(Time.now + 60 * 60), slot_length_mins: 3, interval_mins: 3, exclude_times: 2 }) }.to raise_error(Slotty::InvalidExclusionError, "exclude_times must be an array of time ranges")
-    expect { Slotty.get_slots({ for_range: Time.now..(Time.now + 60 * 60), slot_length_mins: 3, interval_mins: 3, exclude_times: [], as: :wrong }) }.to raise_error(Slotty::InvalidFormatError, "cannot format slot in this way")
+    expect { Slotty.get_slots(for_range: 1, slot_length_mins: 3, interval_mins: 3) }.to raise_error(Slotty::InvalidDateError, "for_value must be type of Range")
+    expect { Slotty.get_slots(for_range: (Time.now..(Time.now + 60 * 60)), slot_length_mins: "", interval_mins: 3) }.to raise_error(Slotty::InvalidSlotLengthError, "slot_length_mins must be an integer")
+    expect { Slotty.get_slots(for_range: Time.now..(Time.now + 60 * 60), slot_length_mins: 3, interval_mins: "") }.to raise_error(Slotty::InvalidIntervalError, "interval_mins must be an integer")
+    expect { Slotty.get_slots(for_range: Time.now..(Time.now + 60 * 60), slot_length_mins: 3, interval_mins: 3, exclude_times: 2) }.to raise_error(Slotty::InvalidExclusionError, "exclude_times must be an array of time ranges")
+    expect { Slotty.get_slots(for_range: Time.now..(Time.now + 60 * 60), slot_length_mins: 3, interval_mins: 3, exclude_times: [], as: :wrong) }.to raise_error(Slotty::InvalidFormatError, "cannot format slot in this way")
   end
 end
 
