@@ -15,6 +15,24 @@ module Slotty
   InvalidExclusionError = Class.new(StandardError)
 
   class << self
+    # Retrieves available slots within a specified range, considering slot length,
+    # interval between slots, and any times to be excluded.
+    #
+    # @param for_range [Range] The range within which to generate slots.
+    # @param slot_length_mins [Integer] The length of each slot in minutes.
+    # @param interval_mins [Integer] The interval between the start of each slot in minutes.
+    # @param as [Symbol] The format in which to return the slots (:full by default).
+    # @param exclude_times [Array<Range>] An array of time ranges to be excluded.
+    # @raise [InvalidDateError] If for_range is not a Range.
+    # @raise [InvalidSlotLengthError] If slot_length_mins is not an integer.
+    # @raise [InvalidIntervalError] If interval_mins is not an integer.
+    # @raise [InvalidExclusionError] If exclude_times is not an array of ranges.
+    # @raise [InvalidFormatError] If the format specified in `as` is invalid.
+    # @return [Array<Object>] An array of slots in the specified format.
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/PerceivedComplexity
     def get_slots(for_range:,
                   slot_length_mins:,
                   interval_mins:,
@@ -57,5 +75,9 @@ module Slotty
 
       slots
     end
+    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/PerceivedComplexity
   end
 end
