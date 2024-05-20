@@ -1,4 +1,6 @@
 # Slotty
+[![Rubocop](https://github.com/haydenrou/slotty/actions/workflows/rubocop.yml/badge.svg)](https://github.com/haydenrou/slotty/actions/workflows/rubocop.yml/badge.svg)
+[![Rspec](https://github.com/haydenrou/slotty/actions/workflows/rspec.yml/badge.svg)](https://github.com/haydenrou/slotty/actions/workflows/rspec.yml/badge.svg)
 
 Slotty provides a way of determining available slots within a time frame. An example would be where a service provider needs to take bookings.
 

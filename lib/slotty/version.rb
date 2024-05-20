@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Slotty
-  VERSION = "1.0.0"
+  VERSION = '1.1.0'
 end
